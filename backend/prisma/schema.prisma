@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String     @id @default(cuid())
+  userId        String     @unique 
+  email          String
+  name           String?
+  createdAt      DateTime   @default(now())
+  friends        Friend[]
+  subscription   Subscription?
+  payments       Payment[]
+  conversations  Conversation[]
+}
+
+model Friend {
+  id             String       @id @default(cuid())
+  name           String
+  gender         Gender
+  tone           Tone
+  temperament    Temperament
+  profileImage   String
+
+
+  humor          Int          @default(5) 
+  empathy        Int          @default(5)
+  sarcasm        Int          @default(0)
+  formality      Int          @default(5)
+  curiosity      Int          @default(5)
+  patience       Int          @default(5)
+  creativity     Int          @default(5)
+  optimism       Int          @default(5)
+
+  userId         String
+  user           User         @relation(fields: [userId], references: [id])
+  conversations  Conversation[]
+  createdAt      DateTime     @default(now())
+}
+
+model Subscription {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id])
+  isPro           Boolean  @default(false)
+  freeCredits     Int      @default(100)
+  credits         Int      @default(100)
+  proExpiry       DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Conversation {
+  id              String   @id @default(cuid())
+  userId          String
+  friendId        String
+  user            User     @relation(fields: [userId], references: [id])
+  friend          Friend   @relation(fields: [friendId], references: [id])
+  messages        Json     
+  createdAt       DateTime @default(now())
+}
+
+model Payment {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  amount          Int
+  credits         Int      
+  currency        String   @default("INR")
+  status          String   
+  provider        String   
+  referenceId     String   
+  createdAt       DateTime @default(now())
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum Tone {
+  FORMAL
+  CASUAL
+  FRIENDLY
+  PROFESSIONAL
+  EMOTIONAL
+}
+
+enum Temperament {
+  CALM
+  AGGRESSIVE
+  NEUTRAL
+  HUMOROUS
+  SUPPORTIVE
+}
