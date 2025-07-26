@@ -40,7 +40,7 @@ export function connectWS(handlers: EventHandlers = {}): Promise<void> {
       socket.close();
     }
     
-    socket = new WebSocket("ws://lumi-vtx4.onrender.com");
+    socket = new WebSocket("wss://lumi-vtx4.onrender.com");
 
     const timeoutId = setTimeout(() => {
       if (socket && socket.readyState === WebSocket.CONNECTING) {
@@ -81,7 +81,7 @@ export function connectWS(handlers: EventHandlers = {}): Promise<void> {
       connectionPromise = null;
       eventHandlers.onError?.({ 
         message: "WebSocket connection error",
-        details: "Check if server is running on ws://lumi-vtx4.onrender.com"
+        details: "Check if server is running on wss://lumi-vtx4.onrender.com"
       });
       reject(new Error("WebSocket connection failed"));
     };
