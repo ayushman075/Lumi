@@ -15,7 +15,7 @@ dotenv.config({
 
 // Middleware
 app.use(cors({
-  origin: ["http://localhost:5173", "https://credit-app-jl8y.vercel.app" , "http://localhost", "http://localhost:8000", "https://qulth.vercel.app"],
+  origin: ["http://localhost:5173", "https://credit-app-jl8y.vercel.app" , "http://localhost", "http://localhost:8000", "https://lumi-opal.vercel.app" , "https://qulth.vercel.app"],
     methods: ["GET", "POST", "OPTIONS", "PUT", "PATCH" , "DELETE"],
     credentials: true
 }));
