@@ -26,17 +26,23 @@ const Navbar: React.FC = () => {
         >
           <a href="/" className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-purple-500 tracking-wide">Lumi</a>
         </motion.div>
-        <motion.div
+       <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="space-x-4"
+          className="flex items-center space-x-2 md:space-x-4"
         >
-          <Button variant="ghost" className="text-lg text-gray-200 hover:text-purple-400 transition-colors">Features</Button>
-          <Button variant="ghost" className="text-lg text-gray-200 hover:text-purple-400 transition-colors">Testimonials</Button>
+          {/* Desktop Navigation - Hidden on mobile */}
+          <div className="hidden md:flex space-x-4">
+            <Button variant="ghost" className="text-lg text-gray-200 hover:text-purple-400 transition-colors">Features</Button>
+            <Button variant="ghost" className="text-lg text-gray-200 hover:text-purple-400 transition-colors">Testimonials</Button>
+          </div>
+          
+          {/* Sign In Button - Always visible but responsive sizing */}
           <Button
             variant="default"
-            className="bg-gradient-to-r from-purple-700 to-purple-500 text-white hover:from-purple-800 hover:to-purple-600 px-6 py-3 text-lg rounded-full transition-all duration-300 shadow-lg"
+            className="bg-gradient-to-r from-purple-700 to-purple-500 text-white hover:from-purple-800 hover:to-purple-600 
+                     px-4 py-2 text-base md:px-6 md:py-3 md:text-lg rounded-full transition-all duration-300 shadow-lg"
             // Update onClick to redirect to Clerk sign-in
             onClick={() => window.location.href = CLERK_SIGN_IN_URL}
           >
