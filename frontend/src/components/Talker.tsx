@@ -598,7 +598,7 @@ export function Talker({
         const errorMsg: ConversationMessage = {
           id: `error-${Date.now()}`,
           type: "error",
-          text: `❌ Connection failed: ${errorMessage}. Make sure the server is running on ws://localhost:3000`,
+          text: `❌ Connection failed: ${errorMessage}. Make sure the server is running on ws://lumi-vtx4.onrender.com`,
           timestamp: Date.now(),
         };
         setConversation(prev => [...prev, errorMsg]);
@@ -822,7 +822,7 @@ export function Talker({
               {error.includes("connect") && (
                 <p className="text-xs text-red-500 mt-2 flex items-center gap-2">
                   <CheckCircle className="w-3 h-3" />
-                  Make sure your WebSocket server is running on ws://localhost:3000
+                  Make sure your WebSocket server is running on ws://lumi-vtx4.onrender.com
                 </p>
               )}
             </div>
