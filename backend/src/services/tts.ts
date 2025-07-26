@@ -1,6 +1,10 @@
 import textToSpeech from "@google-cloud/text-to-speech";
 
-const client = new textToSpeech.TextToSpeechClient();
+
+const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS || "{}");
+const client = new textToSpeech.TextToSpeechClient({
+  credentials,
+});
 
 export async function synthesizeSpeech(text: string): Promise<Buffer> {
 

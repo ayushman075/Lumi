@@ -3,7 +3,11 @@ import speech from '@google-cloud/speech';
 import fs from 'fs';
 import path from 'path';
 
-const client = new speech.SpeechClient();
+
+const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS || "{}");
+const client = new speech.SpeechClient({
+  credentials,
+});
 
 export async function transcribeAudio(audioBuffer: Buffer): Promise<string> {
   try {
